@@ -1,7 +1,7 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 
-const terminalCommands: Record<string, string | JSX.Element> = {
+const terminalCommands: Record<string, string | React.JSX.Element> = {
   help: (
     <div className="text-zinc-300">
       <p>Available commands:</p>
@@ -22,7 +22,7 @@ const terminalCommands: Record<string, string | JSX.Element> = {
 };
 
 export function InteractiveTerminal() {
-  const [history, setHistory] = useState<{ cmd: string; output: string | JSX.Element }[]>([
+  const [history, setHistory] = useState<{ cmd: string; output: string | React.JSX.Element }[]>([
     { cmd: "", output: "Welcome to KamyOS v1.0.0. Type 'help' to see available commands." }
   ]);
   const [input, setInput] = useState("");

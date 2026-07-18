@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
-import { Mail, MessageSquare } from "lucide-react";
+
 
 export function Contact() {
   return (
