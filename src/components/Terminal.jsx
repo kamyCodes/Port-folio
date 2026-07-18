@@ -1,7 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 
-const terminalCommands: Record<string, string | React.JSX.Element> = {
+const terminalCommands = {
   help: (
     <div className="text-zinc-300">
       <p>Available commands:</p>
@@ -22,14 +23,14 @@ const terminalCommands: Record<string, string | React.JSX.Element> = {
 };
 
 export function InteractiveTerminal() {
-  const [history, setHistory] = useState<{ cmd: string; output: string | React.JSX.Element }[]>([
+  const [history, setHistory] = useState([
     { cmd: "", output: "Welcome to KamyOS v1.0.0. Type 'help' to see available commands." }
   ]);
   const [input, setInput] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef(null);
+  const containerRef = useRef(null);
 
-  const handleCommand = (e: React.FormEvent) => {
+  const handleCommand = (e) => {
     e.preventDefault();
     const cmd = input.trim().toLowerCase();
     

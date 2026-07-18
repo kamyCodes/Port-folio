@@ -4,11 +4,18 @@ import { ExternalLink } from "lucide-react";
 
 const projects = [
   {
+    title: "Local Job Connect",
+    description: "A dual-portal job platform connecting local businesses with nearby talent. Includes features like resume parsing and real-time messaging.",
+    tech: ["React", "Node.js", "Express", "MongoDB"],
+    github: "https://github.com/kamyCodes/Local-Job-Connect",
+    live: "https://local-job-connect-e6m3.onrender.com/"
+  },
+  {
     title: "Energy2Green Website",
     description: "A modern corporate website for a renewable energy company, showcasing solar products, services, and company information with a responsive, professional design.",
     tech: ["Next.js", "TypeScript", "Tailwind CSS"],
     github: "https://github.com/kamyCodes",
-    live: "#"
+    live: "https://energy2-green.vercel.app/"
   },
   {
     title: "Sentinel NLP",

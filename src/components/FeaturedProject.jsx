@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
-import { ExternalLink, Code2 } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 export function FeaturedProject() {
   return (
@@ -49,7 +49,7 @@ export function FeaturedProject() {
                   <FaGithub size={20} />
                   <span>GitHub</span>
                 </a>
-                <a href="#" className="flex items-center gap-2 px-6 py-3 bg-emerald-500 text-black hover:bg-emerald-400 rounded-full transition-colors font-medium">
+                <a href="https://local-job-connect-e6m3.onrender.com" className="flex items-center gap-2 px-6 py-3 bg-emerald-500 text-black hover:bg-emerald-400 rounded-full transition-colors font-medium">
                   <ExternalLink size={20} />
                   <span>Live Demo</span>
                 </a>
@@ -58,10 +58,8 @@ export function FeaturedProject() {
             
             <div className="lg:w-1/2 bg-zinc-950 p-8 flex items-center justify-center relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent"></div>
-              {/* Placeholder for project screenshot */}
-              <div className="w-full aspect-video bg-zinc-900 border border-zinc-800 rounded-xl flex items-center justify-center shadow-2xl relative z-10">
-                <Code2 size={48} className="text-zinc-700" />
-                <span className="ml-4 text-zinc-600 font-mono">App Screenshot</span>
+              <div className="w-full aspect-video bg-zinc-900 border border-zinc-800 rounded-xl flex items-center justify-center shadow-2xl relative z-10 overflow-hidden group">
+                <img src="/image.png" alt="Local Job Connect Screenshot" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
               </div>
             </div>
           </motion.div>

@@ -11,15 +11,40 @@ const links = [
   { name: "Contact", href: "#contact" },
 ];
 
+const sectionIds = ["home", "about", "skills", "experience", "featured-project", "other-projects", "terminal", "contact"];
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const observers = [];
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(id);
+        },
+        { rootMargin: "-40% 0px -55% 0px" }
+      );
+      observer.observe(el);
+      observers.push(observer);
+    });
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
+  const isActive = (href) => {
+    const id = href.replace("#", "");
+    return activeSection === id;
+  };
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-black/80 backdrop-blur-md border-b border-zinc-800 py-4" : "bg-transparent py-6"}`}>
@@ -31,11 +56,28 @@ export function Navbar() {
         {/* Desktop Menu */}
         <div className="hidden md:flex gap-8 items-center">
           {links.map((link) => (
-            <a key={link.name} href={link.href} className="text-sm text-zinc-400 hover:text-white transition-colors">
-              {link.name}
+            <a
+              key={link.name}
+              href={link.href}
+              className="relative text-sm transition-colors group"
+              style={{ color: isActive(link.href) ? "#fff" : "" }}
+            >
+              <span className={isActive(link.href) ? "text-white" : "text-zinc-400 hover:text-white transition-colors"}>
+                {link.name}
+              </span>
+              {/* Animated underline */}
+              <span
+                className={`absolute -bottom-1 left-0 h-[2px] bg-emerald-500 rounded-full transition-all duration-300 ${
+                  isActive(link.href) ? "w-full" : "w-0 group-hover:w-full"
+                }`}
+              />
             </a>
           ))}
-          <a href="/Kamyomobong_Resume_Updated.pdf" target="_blank" className="px-5 py-2 rounded-full bg-zinc-900 border border-zinc-800 text-sm font-medium hover:border-emerald-500/50 transition-colors">
+          <a
+            href="/Kamyomobong_Resume_Updated.pdf"
+            target="_blank"
+            className="px-5 py-2 rounded-full bg-zinc-900 border border-zinc-800 text-sm font-medium hover:border-emerald-500/50 transition-colors"
+          >
             Resume
           </a>
         </div>
@@ -49,7 +91,7 @@ export function Navbar() {
       {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
@@ -63,11 +105,20 @@ export function Navbar() {
             </div>
             <div className="flex flex-col gap-6 items-center text-2xl font-medium mt-12">
               {links.map((link) => (
-                <a key={link.name} href={link.href} onClick={() => setMobileMenuOpen(false)} className="text-zinc-400 hover:text-white transition-colors">
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`transition-colors ${isActive(link.href) ? "text-emerald-400" : "text-zinc-400 hover:text-white"}`}
+                >
                   {link.name}
                 </a>
               ))}
-              <a href="/Kamyomobong_Resume_Updated.pdf" target="_blank" className="mt-8 px-8 py-3 rounded-full bg-emerald-500 text-black text-lg">
+              <a
+                href="/Kamyomobong_Resume_Updated.pdf"
+                target="_blank"
+                className="mt-8 px-8 py-3 rounded-full bg-emerald-500 text-black text-lg"
+              >
                 View Resume
               </a>
             </div>
