@@ -11,7 +11,7 @@ export function About() {
           transition={{ duration: 0.5 }}
           className="p-8 md:p-12 rounded-2xl bg-zinc-900/50 border border-zinc-800 backdrop-blur-sm"
         >
-          <h2 className="text-3xl font-bold mb-6 text-blue-500">Problem Solver</h2>
+          <h2 className="text-3xl font-bold mb-6 text-emerald-500">Problem Solver</h2>
           
           <div className="space-y-6 text-lg text-zinc-300">
             <p>

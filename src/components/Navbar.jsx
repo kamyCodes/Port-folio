@@ -50,7 +50,7 @@ export function Navbar() {
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-black/90 backdrop-blur-lg border-b border-zinc-800 py-4" : "bg-black/50 md:bg-transparent backdrop-blur-sm py-6"}`}>
       <div className="container mx-auto px-4 flex justify-between items-center">
         <a href="#home" className="text-xl font-bold tracking-tighter">
-          Kamy<span className="text-blue-500">.</span>
+          Kamy<span className="text-emerald-500">.</span>
         </a>
 
         {/* Desktop Menu */}
@@ -67,7 +67,7 @@ export function Navbar() {
               </span>
               {/* Animated underline */}
               <span
-                className={`absolute -bottom-1 left-0 h-[2px] bg-blue-500 rounded-full transition-all duration-300 ${
+                className={`absolute -bottom-1 left-0 h-[2px] bg-emerald-500 rounded-full transition-all duration-300 ${
                   isActive(link.href) ? "w-full" : "w-0 group-hover:w-full"
                 }`}
               />
@@ -76,7 +76,7 @@ export function Navbar() {
           <a
             href="/Kamyomobong_Resume_Updated.pdf"
             target="_blank"
-            className="px-5 py-2 rounded-full bg-zinc-900 border border-zinc-800 text-sm font-medium hover:border-blue-500/50 transition-colors"
+            className="px-5 py-2 rounded-full bg-zinc-900 border border-zinc-800 text-sm font-medium hover:border-emerald-500/50 transition-colors"
           >
             Resume
           </a>
@@ -109,7 +109,7 @@ export function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`transition-colors ${isActive(link.href) ? "text-blue-400" : "text-zinc-400 hover:text-white"}`}
+                  className={`transition-colors ${isActive(link.href) ? "text-emerald-400" : "text-zinc-400 hover:text-white"}`}
                 >
                   {link.name}
                 </a>
@@ -117,7 +117,7 @@ export function Navbar() {
               <a
                 href="/Kamyomobong_Resume_Updated.pdf"
                 target="_blank"
-                className="mt-8 px-8 py-3 rounded-full bg-blue-500 text-black text-lg"
+                className="mt-8 px-8 py-3 rounded-full bg-emerald-500 text-black text-lg"
               >
                 View Resume
               </a>
