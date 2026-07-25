@@ -7,11 +7,11 @@ const terminalCommands = {
     <div className="text-zinc-300">
       <p>Available commands:</p>
       <ul className="pl-4 mt-2 space-y-1">
-        <li><span className="text-emerald-400">about</span>    - Learn more about me</li>
-        <li><span className="text-emerald-400">projects</span> - View my recent work</li>
-        <li><span className="text-emerald-400">skills</span>   - List my technical stack</li>
-        <li><span className="text-emerald-400">contact</span>  - Get my contact details</li>
-        <li><span className="text-emerald-400">clear</span>    - Clear the terminal</li>
+        <li><span className="text-blue-400">about</span>    - Learn more about me</li>
+        <li><span className="text-blue-400">projects</span> - View my recent work</li>
+        <li><span className="text-blue-400">skills</span>   - List my technical stack</li>
+        <li><span className="text-blue-400">contact</span>  - Get my contact details</li>
+        <li><span className="text-blue-400">clear</span>    - Clear the terminal</li>
       </ul>
     </div>
   ),
@@ -85,7 +85,7 @@ export function InteractiveTerminal() {
             {history.map((entry, idx) => (
               <div key={idx}>
                 {entry.cmd && (
-                  <div className="flex gap-2 text-emerald-400 mb-1">
+                  <div className="flex gap-2 text-blue-400 mb-1">
                     <span>➜</span>
                     <span className="text-cyan-400">~</span>
                     <span className="text-white">{entry.cmd}</span>
@@ -95,7 +95,7 @@ export function InteractiveTerminal() {
               </div>
             ))}
             
-            <form onSubmit={handleCommand} className="flex gap-2 text-emerald-400 mt-2">
+            <form onSubmit={handleCommand} className="flex gap-2 text-blue-400 mt-2">
               <span>➜</span>
               <span className="text-cyan-400">~</span>
               <input 
@@ -103,7 +103,7 @@ export function InteractiveTerminal() {
                 type="text" 
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                className="bg-transparent border-none outline-none text-white flex-1 caret-emerald-500"
+                className="bg-transparent border-none outline-none text-white flex-1 caret-blue-500"
                 autoComplete="off"
                 spellCheck="false"
               />

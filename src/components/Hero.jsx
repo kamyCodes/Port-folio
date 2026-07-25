@@ -10,8 +10,8 @@ export function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_0%,#000_70%,transparent_100%)]"></div>
       </div>
 
-      {/* Emerald glow orb */}
-      {/* <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-[120px] pointer-events-none" /> */}
+      {/* blue glow orb */}
+      {/* <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" /> */}
 
       <div className="container relative z-10 mx-auto px-4 py-20">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
@@ -23,9 +23,9 @@ export function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-sm font-medium mb-6"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-sm font-medium mb-6"
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-400 " />
+              <span className="w-2 h-2 rounded-full bg-blue-400 " />
               Software Engineer
             </motion.div>
 
@@ -37,9 +37,9 @@ export function Hero() {
               className="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight"
             >
               Hi, I'm{" "}
-              <span className="text-emerald-500 relative">
+              <span className="text-blue-500 relative">
                 Kamy
-                {/* <span className="absolute -bottom-1 left-0 right-0 h-[3px] bg-emerald-500/40 rounded-full" /> */}
+                {/* <span className="absolute -bottom-1 left-0 right-0 h-[3px] bg-blue-500/40 rounded-full" /> */}
               </span>
               .
             </motion.h1>
@@ -71,8 +71,8 @@ export function Hero() {
               className="inline-flex items-center gap-2 text-sm text-zinc-400 mb-10"
             >
               <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-500"></span>
               </span>
               Open to Software Engineering opportunities
             </motion.div>
@@ -84,7 +84,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.35 }}
               className="flex flex-wrap gap-4 justify-center lg:justify-start"
             >
-              <a href="#featured-project" className="px-8 py-3 rounded-full bg-emerald-500 text-black font-semibold hover:bg-emerald-400 transition-all shadow-[0_0_20px_rgba(16,185,129,0.35)] hover:shadow-[0_0_30px_rgba(16,185,129,0.55)] hover:scale-105">
+              <a href="#featured-project" className="px-8 py-3 rounded-full bg-blue-500 text-white font-semibold hover:bg-blue-600 transition-all shadow-lg hover:scale-105">
                 View Projects
               </a>
               <a href="/Kamyomobong_Resume_Updated.pdf" target="_blank" className="px-8 py-3 rounded-full bg-zinc-900 border border-zinc-800 text-white font-medium hover:bg-zinc-800 hover:border-zinc-700 transition-all hover:scale-105">
@@ -104,19 +104,21 @@ export function Hero() {
             className="flex-shrink-0 flex items-center justify-center"
           >
             <div className="relative">
-              {/* Outer glow ring */}
-              <div className="absolute inset-0 rounded-full bg-emerald-500/20 blur-2xl scale-110 animate-pulse" />
-              {/* Border ring */}
-              <div className="relative w-56 h-56 md:w-72 md:h-72 rounded-full border-2 border-emerald-500/40 p-1 shadow-[0_0_40px_rgba(16,185,129,0.25)]">
+              {/* Subtle background blob */}
+              <div className="absolute inset-0 rounded-full bg-blue-500/10 blur-3xl scale-150" />
+              
+              {/* Clean Profile Image container */}
+              <div className="relative w-56 h-56 md:w-72 md:h-72 rounded-full border border-zinc-800 p-2 bg-zinc-900/50 shadow-2xl">
                 <img
                   src="/profile.png"
                   alt="Kamy — Software Engineer"
-                  className="w-full h-full rounded-full object-cover object-top"
+                  className="w-full h-full rounded-full object-cover object-top border border-zinc-800"
                 />
               </div>
-              {/* Floating badge */}
-              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-zinc-900 border border-zinc-800 rounded-full px-4 py-1.5 text-xs font-mono text-emerald-400 whitespace-nowrap shadow-lg">
-                &lt;/&gt; Available for hire
+              
+              {/* Floating badge (non-terminal) */}
+              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white text-black font-semibold rounded-full px-5 py-1.5 text-xs whitespace-nowrap shadow-lg">
+                Available for work
               </div>
             </div>
           </motion.div>

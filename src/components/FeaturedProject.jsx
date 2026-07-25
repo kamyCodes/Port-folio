@@ -8,7 +8,7 @@ export function FeaturedProject() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">Featured Case Study</h2>
-          <div className="h-1 w-20 bg-emerald-500 mx-auto rounded-full"></div>
+          <div className="h-1 w-20 bg-blue-500 mx-auto rounded-full"></div>
         </div>
 
         <div className="max-w-6xl mx-auto">
@@ -19,7 +19,7 @@ export function FeaturedProject() {
             className="bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-800 flex flex-col lg:flex-row"
           >
             <div className="lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center">
-              <span className="text-emerald-500 font-semibold mb-2">Featured Project</span>
+              <span className="text-blue-500 font-semibold mb-2">Featured Project</span>
               <h3 className="text-3xl font-bold mb-4">Local Job Connect</h3>
               
               <div className="prose prose-invert mb-8">
@@ -49,7 +49,7 @@ export function FeaturedProject() {
                   <FaGithub size={20} />
                   <span>GitHub</span>
                 </a>
-                <a href="https://local-job-connect-e6m3.onrender.com" className="flex items-center gap-2 px-6 py-3 bg-emerald-500 text-black hover:bg-emerald-400 rounded-full transition-colors font-medium">
+                <a href="https://local-job-connect-e6m3.onrender.com" className="flex items-center gap-2 px-6 py-3 bg-blue-500 text-black hover:bg-blue-400 rounded-full transition-colors font-medium">
                   <ExternalLink size={20} />
                   <span>Live Demo</span>
                 </a>
@@ -57,7 +57,7 @@ export function FeaturedProject() {
             </div>
             
             <div className="lg:w-1/2 bg-zinc-950 p-8 flex items-center justify-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent"></div>
               <div className="w-full aspect-video bg-zinc-900 border border-zinc-800 rounded-xl flex items-center justify-center shadow-2xl relative z-10 overflow-hidden group">
                 <img src="/image.png" alt="Local Job Connect Screenshot" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
               </div>
