@@ -52,7 +52,7 @@ const home: Home = {
   label: "Home",
   title: `Kamy Ewang – Software Engineer & AI Developer`,
   description: `Kamy Ewang is a Software Engineer based in Uyo, Nigeria, specialising in AI-powered full-stack applications, real-time platforms, and modern web development with React, Next.js, Python, and Flask.`,
-  headline: <>Building AI-powered products that solve real-world problems</>,
+  headline: <>Building intelligent products that solve real-world problems</>,
   featured: {
     display: true,
     title: (
