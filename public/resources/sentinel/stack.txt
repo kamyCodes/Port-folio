@@ -1,0 +1,5 @@
+Backend: Python 3.12, FastAPI, PyTorch, Hugging Face Transformers (DeBERTa-v3-large zero-shot NLI), spaCy, NLTK
+
+Frontend: React, Vite, CSS (glassmorphism + SVG donut charts)
+
+External APIs: Google Fact Check, DuckDuckGo Search, URLhaus malware DB, GROQ API

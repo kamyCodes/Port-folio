@@ -1,0 +1,11 @@
+
+
+**Mobile:** React 19, React Native 0.81, Expo 54, React Native Web 0.21, Expo Linear Gradient, Expo Document Picker
+
+**Storage:** React Native Async Storage
+
+**Backend:** Express 4, CORS, dotenv
+
+**AI & PDF:** Groq SDK (Llama 3.3 70B), pdf-parse
+
+**Runtime:** Node.js

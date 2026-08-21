@@ -1,0 +1,34 @@
+---
+title: "Local Job Connect"
+publishedAt: "2025-08-01"
+summary: "A dual-portal job platform connecting local businesses with nearby talent, featuring AI resume parsing, real-time messaging, and geolocation-based search."
+images:
+  - "/resources/LJC/LJC3.webp"
+  - "/resources/LJC/LJC1.webp"
+  - "/resources/LJC/LJC2.webp"
+team:
+  - name: "Kamy Ewang"
+    role: "Full-Stack Developer"
+    avatar: "/me.jpeg"
+    linkedIn: "https://www.linkedin.com/in/kamyomobong-ewang-4a29822b7"
+link: "https://github.com/kamyCodes"
+---
+
+## Overview
+
+Local Job Connect is Nigeria's dedicated local job platform — a full-stack web application that bridges the gap between local businesses and nearby job seekers. It features a dual-portal system where employers can post jobs and manage applications, while candidates can search by location, apply with AI-parsed resumes, and communicate in real time.
+
+## Key Features
+
+- **Dual-Portal System**: Separate dashboards for employers and job seekers, each tailored to their workflow — posting jobs, reviewing applicants, or browsing and applying.
+- **AI Resume Parsing**: Integrated intelligent resume analysis to automatically extract key skills and experience, streamlining the application review process for employers.
+- **Geolocation Search**: Leveraged `geopy` to enable location-based job discovery, letting candidates find opportunities close to home.
+- **Real-Time Messaging**: Built an in-app messaging system so employers and candidates can communicate directly without leaving the platform.
+- **Glassmorphism UI**: Designed a modern, dark-themed interface using vanilla CSS with HSL variables, glassmorphism effects, and micro-animations for a premium feel.
+
+## Technologies Used
+
+- **Backend**: Python 3.12, Flask, Flask-SQLAlchemy, Flask-Login, Flask-WTF, Flask-Caching, Werkzeug, geopy, gunicorn
+- **Frontend**: Jinja2 templates, Vanilla CSS (HSL variables, glassmorphism, micro-animations)
+- **Database**: SQLite (with psycopg2-binary for PostgreSQL production-ready swap)
+- **Dev & Testing**: pytest, pytest-flask, Flask-Migrate, python-dotenv

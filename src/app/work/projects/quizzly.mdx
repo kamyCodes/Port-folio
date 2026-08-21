@@ -1,0 +1,33 @@
+---
+title: "Quizzly"
+publishedAt: "2025-02-01"
+summary: "An AI-powered mobile quiz app that generates customized quizzes from any topic or uploaded document using Llama 3.3, built with React Native and Expo."
+images:
+  - "/resources/quizzly/quizzly.webp"
+team:
+  - name: "Kamy Ewang"
+    role: "Mobile Developer"
+    avatar: "/me.jpeg"
+    linkedIn: "https://www.linkedin.com/in/kamyomobong-ewang-4a29822b7"
+link: "https://github.com/kamyCodes"
+---
+
+## Overview
+
+Quizzly is a cross-platform mobile application that uses AI to generate personalized quizzes. Users can create quizzes by entering any topic or uploading a document (PDF/text), selecting the number of questions and difficulty level, and letting the AI generate a tailored knowledge check — all from their phone.
+
+## Key Features
+
+- **AI Quiz Generation**: Powered by Groq SDK with Llama 3.3 70B, the app generates contextually relevant multiple-choice questions from any topic or uploaded document.
+- **Document Upload**: Supports PDF and text file uploads via Expo Document Picker, parsing content server-side with `pdf-parse` to generate quiz material.
+- **Customizable Parameters**: Users choose the number of questions (3, 5, or 10) and difficulty level (Easy, Medium, Hard) to tailor each quiz session.
+- **Cross-Platform**: Built with React Native and Expo for seamless deployment on both iOS and Android, with React Native Web support.
+- **Local Storage**: Quiz history and progress are persisted using React Native Async Storage for offline access.
+
+## Technologies Used
+
+- **Mobile**: React 19, React Native 0.81, Expo 54, React Native Web 0.21, Expo Linear Gradient, Expo Document Picker
+- **Storage**: React Native Async Storage
+- **Backend**: Express 4, CORS, dotenv
+- **AI & PDF**: Groq SDK (Llama 3.3 70B), pdf-parse
+- **Runtime**: Node.js

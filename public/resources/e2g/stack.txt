@@ -1,0 +1,5 @@
+Frontend: React 19, React Router DOM 7, Framer Motion 12, Lucide React, Tailwind CSS 4, Vite 8
+
+Analytics & Hosting: Vercel Analytics, Vercel
+
+Dev & Linting: ESLint 10 (React Hooks + React Refresh plugins), PostCSS, Autoprefixer

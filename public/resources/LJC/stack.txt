@@ -1,0 +1,7 @@
+Backend: Python 3.12, Flask, Flask-SQLAlchemy, Flask-Login, Flask-WTF, Flask-Caching, Werkzeug, geopy, gunicorn
+
+Frontend: Jinja2 templates, Vanilla CSS (HSL variables, glassmorphism, micro-animations)
+
+Database: SQLite (with psycopg2-binary for PostgreSQL production-ready swap)
+
+Dev & Testing: pytest, pytest-flask, Flask-Migrate, python-dotenv

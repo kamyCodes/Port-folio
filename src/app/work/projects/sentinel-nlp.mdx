@@ -1,0 +1,31 @@
+---
+title: "Sentinel NLP"
+publishedAt: "2025-06-01"
+summary: "An AI-powered fake news detection and cyber threat intelligence analyzer using zero-shot NLI models, fact-checking APIs, and malware database lookups."
+images:
+  - "/resources/sentinel/sentinel.webp"
+team:
+  - name: "Kamy Ewang"
+    role: "Full-Stack Developer"
+    avatar: "/me.jpeg"
+    linkedIn: "https://www.linkedin.com/in/kamyomobong-ewang-4a29822b7"
+link: "https://github.com/kamyCodes"
+---
+
+## Overview
+
+Sentinel NLP is a final-year university project that combines Natural Language Processing with Cyber Threat Intelligence to combat misinformation and online threats. Users can paste any article or suspicious content and receive an instant, multi-dimensional analysis — including fake news probability, news authenticity scoring, originality assessment, and cyber threat risk evaluation.
+
+## Key Features
+
+- **Zero-Shot NLI Classification**: Leveraged Hugging Face's DeBERTa-v3-large model for zero-shot natural language inference, enabling the system to classify news credibility without task-specific training data.
+- **Multi-Score Dashboard**: Provides three core scores — Fake News Probability, News Authenticity, and Originality — displayed through custom SVG donut charts with color-coded risk levels.
+- **Cyber Threat Analysis**: A dedicated module that scans suspicious content for phishing indicators, malware URLs (via URLhaus), and social engineering patterns.
+- **External API Integration**: Cross-references content with Google Fact Check API and DuckDuckGo Search for real-time corroboration, plus GROQ API for advanced LLM-powered analysis.
+- **Glassmorphism Dark UI**: Built a sleek, professional dark-themed interface with glassmorphism cards and responsive design.
+
+## Technologies Used
+
+- **Backend**: Python 3.12, FastAPI, PyTorch, Hugging Face Transformers (DeBERTa-v3-large zero-shot NLI), spaCy, NLTK
+- **Frontend**: React, Vite, CSS (glassmorphism + SVG donut charts)
+- **External APIs**: Google Fact Check, DuckDuckGo Search, URLhaus malware DB, GROQ API
