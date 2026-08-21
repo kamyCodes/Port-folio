@@ -175,7 +175,7 @@ export const Header = () => {
               )}
               <Line background="neutral-alpha-medium" vert maxHeight="24" />
               <SmartLink
-                href="/Resume.docx"
+                href="/resume"
                 target="_blank"
                 suffixIcon="arrowUpRightFromSquare"
                 style={{ padding: "0 12px" }}
