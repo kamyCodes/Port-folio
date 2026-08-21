@@ -13,7 +13,7 @@ import {
 } from "@/types";
 import { home, person, social } from "./content";
 
-const baseURL: string = "https://kamycodes.dev";
+const baseURL: string = "https://www.kamy.name.ng";
 
 const routes: RoutesConfig = {
   "/": true,

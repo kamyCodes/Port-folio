@@ -8,7 +8,7 @@ const person: Person = {
   role: "Software Engineer",
   avatar: "/me.jpeg",
   email: "kamy.ngn@gmail.com",
-  location: "Africa/Lagos",
+  location: "Uyo, Nigeria",
   languages: ["English"],
   locale: "en",
 };
@@ -50,8 +50,8 @@ const home: Home = {
   path: "/",
   image: "/images/og/home.jpg",
   label: "Home",
-  title: `${person.name}'s Portfolio`,
-  description: `Portfolio website showcasing my work as a ${person.role}`,
+  title: `Kamy Ewang – Software Engineer & AI Developer`,
+  description: `Kamy Ewang is a Software Engineer based in Uyo, Nigeria, specialising in AI-powered full-stack applications, real-time platforms, and modern web development with React, Next.js, Python, and Flask.`,
   headline: <>Building AI-powered products that solve real-world problems</>,
   featured: {
     display: true,
@@ -77,8 +77,8 @@ const home: Home = {
 const about: About = {
   path: "/about",
   label: "About",
-  title: `About – ${person.name}`,
-  description: `Meet ${person.name}, ${person.role} from ${person.location}`,
+  title: `About Kamy Ewang – Software Engineer in Nigeria`,
+  description: `Kamy Ewang is a Software Engineer from Uyo, Nigeria, building AI-powered applications, full-stack web platforms, and innovative tech solutions. Currently seeking software engineering opportunities.`,
   tableOfContent: {
     display: true,
     subItems: false,
@@ -220,8 +220,8 @@ const blog: Blog = {
 const work: Work = {
   path: "/work",
   label: "Work",
-  title: `Projects – ${person.name}`,
-  description: `Design and dev projects by ${person.name}`,
+  title: `Projects by Kamy Ewang – AI & Full-Stack Development`,
+  description: `Explore full-stack and AI-powered projects built by Kamy Ewang, including Local Job Connect, Sentinel NLP, Energy2Green, and more.`,
 };
 
 const gallery: Gallery = {
