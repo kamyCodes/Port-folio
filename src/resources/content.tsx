@@ -221,7 +221,7 @@ const work: Work = {
   path: "/work",
   label: "Work",
   title: `Projects by Kamy Ewang – AI & Full-Stack Development`,
-  description: `Explore full-stack and AI-powered projects built by Kamy Ewang, including Local Job Connect, Sentinel NLP, Energy2Green, and more.`,
+  description: `Explore full-stack and AI-powered projects built by Kamy Ewang, including Candid, Local Job Connect, Sentinel NLP, Energy2Green, and more.`,
 };
 
 const gallery: Gallery = {

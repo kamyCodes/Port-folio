@@ -1,0 +1,37 @@
+---
+title: "Candid"
+publishedAt: "2026-09-04"
+summary: "A quiet, local-first hiring pipeline. Drag candidates across a Kanban board or triage them in a sortable list, with notes, ratings, and full history. No server, no account, data stays in your browser."
+images:
+  - "/resources/candid/candid-board.png"
+team:
+  - name: "Kamy Ewang"
+    role: "Full-Stack Developer"
+    avatar: "/me.jpeg"
+    linkedIn: "https://www.linkedin.com/in/kamyomobong-ewang-4a29822b7"
+link: "https://candid-navy.vercel.app/"
+source: "https://github.com/kamyCodes/Candid"
+---
+
+## Overview
+
+Candid is a local-first hiring pipeline that assumes the opposite of most applicant trackers: one person, one tab, six stages. Drag a card, write down what you actually thought of the person, and move on.
+
+There is no server, no database, and no account. Candidates and activity are stored in `localStorage`, so the app works offline, loads instantly, and your data never leaves your machine. Live demo deployed on Vercel.
+
+## Key Features
+
+- **One pipeline, two views**: A drag-and-drop board for running the funnel and a sortable table for triage — both share the same stage colors, chips, and type scale.
+- **Notes and ratings**: One-to-five star ratings plus timestamped notes, signed with your name or left anonymous.
+- **Search while you type**: Filter by name, email, role, or phone, combinable with a stage dropdown in either view.
+- **Activity log**: Every move, note, and rating, newest first, capped at the last fifty entries.
+- **Nothing depends on dragging**: Every card has stage arrows, every row has a dropdown, focus rings stay visible, and `Esc` and `Cmd/Ctrl + Enter` cover the repetitive bits.
+- **Slide-out detail panel**: Any card or row opens a full profile with notes, rating, and edit or delete actions, backed by an inline add form with live validation and duplicate checks.
+
+## Technologies Used
+
+- **Frontend**: Next.js (App Router), React, TypeScript
+- **Styling**: Tailwind CSS v4 with a hand-rolled "ink and copper" token system in CSS variables
+- **State**: React Context plus a small `useLocalStorage` hook — state flows one way, with views deriving search, filter, and sort at render time
+- **UI**: Hand-rolled icons and primitives; no UI or state library
+- **Type**: Geist via `next/font`
