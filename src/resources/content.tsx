@@ -109,7 +109,7 @@ const about: About = {
         role: "Full-Stack Developer",
         achievements: [
           <>
-            Built Local Job Connect, a personal project — a dual-portal job platform connecting local businesses with nearby talent, featuring AI resume parsing and real-time messaging.
+            Built Local Job Connect, a personal project and dual-portal job platform connecting local businesses with nearby talent, featuring AI resume parsing and real-time messaging.
           </>,
           <>
             Developed Energy2Green, a modern corporate website for a renewable energy company with responsive, professional design.
