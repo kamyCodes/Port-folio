@@ -1,0 +1,20 @@
+.card {
+    position: relative;
+    transition: transform var(--transition-micro-medium),
+        box-shadow var(--transition-micro-medium),
+        border-color var(--transition-micro-medium);
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px -12px rgb(0 0 0 / 0.35);
+        border-color: var(--neutral-border-strong);
+
+        .image {
+            transform: scale(1.03);
+        }
+    }
+}
+
+.image {
+    transition: transform var(--transition-micro-medium);
+}
