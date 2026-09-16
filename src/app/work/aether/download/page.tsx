@@ -15,9 +15,17 @@ import {
   Text,
 } from "@once-ui-system/core";
 import { about, baseURL, person } from "@/resources";
+import { formatDate } from "@/utils/formatDate";
+import { CopyButton } from "@/components/CopyButton";
+import {
+  formatBytes,
+  getLatestRelease,
+  RELEASES_URL,
+  RELEASES_LIST_URL,
+  type ReleaseInfo,
+} from "@/utils/githubRelease";
 
 const REPO = "https://github.com/kamyCodes/Aether";
-const RELEASES = `${REPO}/releases/latest`;
 
 const features = [
   {
@@ -71,12 +79,12 @@ const steps = [
   },
 ];
 
-const sourceCommands = [
-  "git clone https://github.com/kamyCodes/Aether.git",
-  "cd Aether",
-  "npm install",
-  "npm run dev",
-];
+/** Formats 1234 as "1.2k", 125000 as "125k" — for compact display. */
+function formatCount(count: number): string {
+  if (count >= 1_000_000) return `${(count / 1_000_000).toFixed(1)}M`;
+  if (count >= 1_000) return `${(count / 1_000).toFixed(1)}k`;
+  return String(count);
+}
 
 function FeatureCard({ icon, title, body }: { icon: string; title: string; body: string }) {
   return (
@@ -100,18 +108,162 @@ function FeatureCard({ icon, title, body }: { icon: string; title: string; body:
   );
 }
 
+function DownloadButton({ release }: { release: ReleaseInfo | null }) {
+  const href = release?.latestDownloadUrl ?? RELEASES_URL;
+  const size = release?.installer ? formatBytes(release.installer.size) : "";
+
+  return (
+    <Button
+      href={href}
+      target="_blank"
+      variant="primary"
+      size="m"
+      prefixIcon="download"
+      arrowIcon
+    >
+      Download for Windows
+      {size && ` · ${size}`}
+    </Button>
+  );
+}
+
+function VerifyDownload({ release }: { release: ReleaseInfo }) {
+  if (!release.sha256Digest) return null;
+
+  const certutilCommand = `certutil -hashfile ${release.installer?.name ?? "Aether-Setup.exe"} SHA256`;
+
+  return (
+    <Card
+      fillWidth
+      direction="column"
+      gap="12"
+      padding="16"
+      border="neutral-alpha-weak"
+      background="surface"
+      radius="l"
+    >
+      <Row gap="8" vertical="center" wrap horizontal="center">
+        <Icon name="shield" size="s" onBackground="brand-medium" />
+        <Text variant="label-strong-s">Verify the download (SHA-256)</Text>
+      </Row>
+      <Row gap="8" vertical="center" fillWidth>
+        <Text
+          variant="code-default-xs"
+          onBackground="neutral-weak"
+          style={{
+            fontFamily: "monospace",
+            wordBreak: "break-all",
+            flex: 1,
+          }}
+        >
+          {release.sha256Digest}
+        </Text>
+        <CopyButton value={release.sha256Digest} tooltip="Copy hash" />
+      </Row>
+      <Column
+        gap="8"
+        padding="12"
+        background="neutral-alpha-weak"
+        radius="m"
+        fillWidth
+      >
+        <Text variant="label-default-xs" onBackground="neutral-weak">
+          After downloading, run in PowerShell or Command Prompt:
+        </Text>
+        <Row gap="8" vertical="center" fillWidth>
+          <Text
+            variant="code-default-xs"
+            style={{ fontFamily: "monospace", wordBreak: "break-all", flex: 1 }}
+          >
+            {certutilCommand}
+          </Text>
+          <CopyButton value={certutilCommand} tooltip="Copy command" />
+        </Row>
+      </Column>
+      <Row gap="16" wrap horizontal="center">
+        {release.sha256 && (
+          <SmartLink href={release.sha256.url} target="_blank">
+            <Text variant="label-default-xs">.sha256 file</Text>
+          </SmartLink>
+        )}
+        <SmartLink href={release.htmlUrl} target="_blank">
+          <Text variant="label-default-xs">Release on GitHub</Text>
+        </SmartLink>
+      </Row>
+    </Card>
+  );
+}
+
+function ReleaseNotes({ release }: { release: ReleaseInfo }) {
+  if (release.sections.length === 0) return null;
+
+  return (
+    <Column fillWidth gap="16">
+      <Heading as="h2" variant="heading-strong-l">
+        What&rsquo;s new in {release.tagName}
+      </Heading>
+      <Card
+        fillWidth
+        direction="column"
+        gap="16"
+        padding="l"
+        border="neutral-alpha-weak"
+        background="surface"
+        radius="l"
+      >
+        {release.sections.map((section, index) => (
+          <Column key={index} gap="8" fillWidth>
+            {section.label && (
+              <Text variant="label-strong-s" onBackground="brand-medium">
+                {section.label}
+              </Text>
+            )}
+            {section.text && (
+              <Text variant="body-default-m" onBackground="neutral-weak">
+                {section.text}
+              </Text>
+            )}
+            {section.bullets.length > 0 && (
+              <Column as="ul" gap="4" paddingX="4">
+                {section.bullets.map((bullet, bulletIndex) => (
+                  <Row key={bulletIndex} gap="8" vertical="center">
+                    <Text variant="body-default-s" onBackground="brand-medium">
+                      –
+                    </Text>
+                    <Text variant="body-default-s" onBackground="neutral-weak">
+                      {bullet}
+                    </Text>
+                  </Row>
+                ))}
+              </Column>
+            )}
+          </Column>
+        ))}
+        <SmartLink href={release.htmlUrl} target="_blank" suffixIcon="arrowUpRightFromSquare">
+          <Text variant="label-default-m">Full release notes on GitHub</Text>
+        </SmartLink>
+      </Card>
+    </Column>
+  );
+}
+
 export async function generateMetadata() {
+  const release = await getLatestRelease();
+
   return Meta.generate({
     title: "Download Aether – local-first AI development environment",
-    description:
-      "Download Aether for Windows: a desktop IDE with a built-in, permission-gated autonomous coding agent. Local-first — your code and API keys never leave your machine.",
+    description: release
+      ? `Download Aether ${release.tagName} for Windows: a desktop IDE with a built-in, permission-gated autonomous coding agent. Local-first — your code and API keys never leave your machine.`
+      : "Download Aether for Windows: a desktop IDE with a built-in, permission-gated autonomous coding agent. Local-first — your code and API keys never leave your machine.",
     baseURL: baseURL,
     image: "/resources/aether/aether-icon.png",
     path: "/work/aether/download",
   });
 }
 
-export default function AetherDownload() {
+export default async function AetherDownload() {
+  const release = await getLatestRelease();
+
   return (
     <Column as="section" maxWidth="m" horizontal="center" gap="l" paddingTop="24">
       <Schema
@@ -154,27 +306,35 @@ export default function AetherDownload() {
           leave your machine.
         </Text>
         <Row gap="8" wrap horizontal="center">
+          {release ? (
+            <Tag variant="brand" prefixIcon="download">
+              {release.tagName} latest
+            </Tag>
+          ) : (
+            <Tag variant="neutral" prefixIcon="download">
+              Free installer
+            </Tag>
+          )}
+          {release != null && release.totalDownloads > 0 && (
+            <Tag variant="neutral" prefixIcon="download">
+              {formatCount(release.totalDownloads)} downloads
+            </Tag>
+          )}
+          {release?.publishedAt && (
+            <Tag variant="neutral">
+              Released {formatDate(release.publishedAt, true)}
+            </Tag>
+          )}
+          {release?.prerelease && <Tag variant="warning">Pre-release</Tag>}
           <Tag variant="neutral" prefixIcon="windows">
             Windows 10 / 11
-          </Tag>
-          <Tag variant="neutral" prefixIcon="download">
-            Free installer
           </Tag>
           <Tag variant="neutral" prefixIcon="shield">
             Local-first
           </Tag>
         </Row>
         <Row gap="12" wrap horizontal="center" paddingTop="8">
-          <Button
-            href={RELEASES}
-            target="_blank"
-            variant="primary"
-            size="m"
-            prefixIcon="download"
-            suffixIcon="arrowUpRightFromSquare"
-          >
-            Download for Windows
-          </Button>
+          <DownloadButton release={release} />
           <Button
             href={REPO}
             target="_blank"
@@ -185,7 +345,15 @@ export default function AetherDownload() {
             View on GitHub
           </Button>
         </Row>
+        {release?.installer && (
+          <Text variant="body-default-xs" onBackground="neutral-weak">
+            {release.installer.name}
+          </Text>
+        )}
+        {release && <VerifyDownload release={release} />}
       </Column>
+
+      {release && <ReleaseNotes release={release} />}
 
       <Column fillWidth gap="16">
         <Heading as="h2" variant="heading-strong-l">
@@ -201,7 +369,16 @@ export default function AetherDownload() {
           <Tag variant="neutral" prefixIcon="computer">
             Per-user install, no admin needed
           </Tag>
+          <Tag variant="neutral" prefixIcon="cpu">
+            Model gateway required for AI features
+          </Tag>
         </Row>
+        <Text variant="body-default-s" onBackground="neutral-weak">
+          Requires a running OpenAI-compatible model gateway — self-hosted
+          OmniRoute, or any compatible API plus key — for the AI/agent features
+          to function. The IDE itself runs fine without one, but the agent will
+          show as disconnected until a gateway is reachable.
+        </Text>
         <Text variant="body-default-s" onBackground="neutral-weak">
           Your data never lives in the install directory: it stays in{" "}
           <Text as="span" variant="code-default-s">
@@ -264,49 +441,6 @@ export default function AetherDownload() {
         </Column>
       </Column>
 
-      <Card
-        fillWidth
-        direction="column"
-        gap="16"
-        padding="l"
-        border="neutral-alpha-weak"
-        background="surface"
-        radius="l"
-      >
-        <Row gap="12" vertical="center" wrap>
-          <Icon name="terminal" size="m" onBackground="brand-medium" />
-          <Heading as="h3" variant="heading-strong-m">
-            Run from source
-          </Heading>
-          <Tag variant="neutral">Node.js 22+</Tag>
-        </Row>
-        <Column
-          gap="8"
-          padding="16"
-          background="neutral-alpha-weak"
-          border="neutral-alpha-weak"
-          radius="m"
-        >
-          {sourceCommands.map((command) => (
-            <Text
-              key={command}
-              variant="label-default-m"
-              style={{ fontFamily: "monospace", whiteSpace: "pre-wrap" }}
-            >
-              {command}
-            </Text>
-          ))}
-        </Column>
-        <Text variant="body-default-s" onBackground="neutral-weak">
-          <Text as="span" variant="code-default-s">
-            npm run dev
-          </Text>{" "}
-          starts the API server and the Vite dev server together; the UI opens on
-          the Vite port. Ports and hosts come from the server config (override
-          with PORT / HOST).
-        </Text>
-      </Card>
-
       <Column fillWidth gap="40" horizontal="center" marginTop="24">
         <Line maxWidth="40" />
         <Row gap="24" wrap horizontal="center">
@@ -316,8 +450,8 @@ export default function AetherDownload() {
           <SmartLink href={REPO} target="_blank" suffixIcon="arrowUpRightFromSquare">
             <Text variant="label-default-m">GitHub repository</Text>
           </SmartLink>
-          <SmartLink href="/work/aether">
-            <Text variant="label-default-m">About Aether</Text>
+          <SmartLink href={release?.releasesListUrl ?? RELEASES_LIST_URL} target="_blank">
+            <Text variant="label-default-m">All releases</Text>
           </SmartLink>
         </Row>
       </Column>

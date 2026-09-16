@@ -19,6 +19,8 @@ import {
   HiShieldCheck,
   HiSparkles,
   HiBookOpen,
+  HiClipboard,
+  HiCheck,
 } from "react-icons/hi2";
 
 import {
@@ -52,6 +54,8 @@ export const iconLibrary: Record<string, IconType> = {
   shield: HiShieldCheck,
   sparkles: HiSparkles,
   bookOpen: HiBookOpen,
+  copy: HiClipboard,
+  check: HiCheck,
   email: HiEnvelope,
   globe: HiOutlineGlobeAsiaAustralia,
   person: PiUserCircleDuotone,
