@@ -1,0 +1,41 @@
+---
+title: "Aether"
+publishedAt: "2026-09-16"
+summary: "A local-first AI development environment: a desktop IDE (Electron + React) with a built-in, permission-gated autonomous coding agent. Bring your own OpenAI-compatible model gateway — your code and keys never leave your machine."
+images:
+  - "/resources/aether/aether-icon.png"
+team:
+  - name: "Kamy Ewang"
+    role: "Creator & Maintainer"
+    avatar: "/me.jpeg"
+    linkedIn: "https://www.linkedin.com/in/kamyomobong-ewang-4a29822b7"
+link: "/work/aether/download"
+source: "https://github.com/kamyCodes/Aether"
+---
+
+## Overview
+
+Aether is a local-first AI development environment — a full desktop IDE with an autonomous coding agent built in. It runs entirely on your machine: an Electron + React desktop app paired with a TypeScript backend that drives an agent which reads and edits your code, runs shell commands, searches the repository, and operates git — always behind an explicit permission system, with every step streamed live into the UI.
+
+The agent talks to any OpenAI-compatible model gateway (Aether ships with support for OmniRoute, a self-hosted gateway), so you choose the models — local or cloud — and your code and API keys never leave your machine.
+
+## Key Features
+
+- **Real desktop IDE**: Monaco editor, file tree, git panel, integrated terminal (node-pty), live preview, and code map — panels that resize and remember.
+- **Autonomous agent, permission-gated**: The agent plans, calls tools (edit / shell / search / git), and streams its work over WebSockets. Every tool call passes an allow/deny engine, and approvals persist across restarts.
+- **Local-first by design**: The gateway endpoint, ports, and data directory are the only configuration. Keys live in local settings, are masked in logs, and a "mock guard" refuses to run against fake gateways in production.
+- **Project memory & history**: Optional PostgreSQL backing for task history, usage dashboards, and project memory. Skip it and everything else still works.
+- **Setup that actually tests**: The first-run wizard write-probes the data directory, makes a real `/models` call, runs a real SQL query, and shows a per-item pass/fail checklist.
+- **Hardened by an audit gate**: CI scans every commit for hardcoded paths/ports, secrets, leftover mocks, and dead flags — nothing ships without an explicit, documented allowlist entry.
+
+## Technologies Used
+
+- **Desktop shell**: Electron with an NSIS (electron-builder) Windows installer; runtime bundled, no Node.js required for users
+- **Frontend**: React 19 + Vite, Monaco editor, Zustand state store, WebSocket streaming
+- **Backend**: TypeScript (ESM) Express API server; agent runtime with a permission-gated tool surface (edit, shell, search, git)
+- **Models**: Any OpenAI-compatible gateway; ships with OmniRoute (self-hosted) support
+- **Data & QA**: Optional PostgreSQL (history, usage, memory), node:test suites, CI audit gate on ubuntu + windows runners
+
+## Download
+
+Aether is available for Windows — grab the latest installer from [GitHub Releases](https://github.com/kamyCodes/Aether/releases) or head to the [download page](/work/aether/download).

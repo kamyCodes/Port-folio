@@ -7,11 +7,18 @@ import {
   HiEnvelope,
   HiCalendarDays,
   HiArrowRight,
+  HiArrowDownTray,
   HiOutlineEye,
   HiOutlineEyeSlash,
   HiOutlineDocument,
   HiOutlineGlobeAsiaAustralia,
   HiOutlineRocketLaunch,
+  HiComputerDesktop,
+  HiCpuChip,
+  HiCommandLine,
+  HiShieldCheck,
+  HiSparkles,
+  HiBookOpen,
 } from "react-icons/hi2";
 
 import {
@@ -32,10 +39,19 @@ import {
 } from "react-icons/si";
 
 import { FaDiscord, FaGithub, FaLinkedin, FaX, FaThreads, FaInstagram, FaXTwitter, FaFacebook, FaPinterest, FaWhatsapp, FaReddit, FaTelegram, } from "react-icons/fa6";
+import { FaWindows } from "react-icons/fa6";
 
 export const iconLibrary: Record<string, IconType> = {
   arrowUpRight: HiArrowUpRight,
   arrowRight: HiArrowRight,
+  download: HiArrowDownTray,
+  windows: FaWindows,
+  computer: HiComputerDesktop,
+  cpu: HiCpuChip,
+  terminal: HiCommandLine,
+  shield: HiShieldCheck,
+  sparkles: HiSparkles,
+  bookOpen: HiBookOpen,
   email: HiEnvelope,
   globe: HiOutlineGlobeAsiaAustralia,
   person: PiUserCircleDuotone,
