@@ -1,4 +1,5 @@
 import {
+  AccordionGroup,
   Button,
   Card,
   Column,
@@ -85,6 +86,46 @@ function formatCount(count: number): string {
   if (count >= 1_000) return `${(count / 1_000).toFixed(1)}k`;
   return String(count);
 }
+
+const faqs = [
+  {
+    question: "Why does Windows show a SmartScreen warning?",
+    answer: (
+      <>
+        Installer builds are unsigned during development, so SmartScreen asks
+        for confirmation on first run. Click <Text as="span" variant="code-default-xs">More info</Text> then{" "}
+        <Text as="span" variant="code-default-xs">Run anyway</Text> to continue.
+        Code signing is planned — see the installer docs on GitHub for the
+        current status.
+      </>
+    ),
+  },
+  {
+    question: "Do I need a model gateway, and how do I set one up?",
+    answer: (
+      <>
+        Only for the AI/agent features. Aether works with any OpenAI-compatible
+        gateway — it ships with support for self-hosted OmniRoute — and your
+        code and API keys never leave your machine. The first-run wizard walks
+        you through the endpoint and key and verifies both with a real call;
+        you can change them any time under Settings. Without a reachable
+        gateway the IDE still runs, but the agent shows as disconnected.
+      </>
+    ),
+  },
+  {
+    question: "Where does Aether store my data?",
+    answer: (
+      <>
+        Never in the install directory. Your settings, keys, and project data
+        live in <Text as="span" variant="code-default-xs">%APPDATA%\Aether</Text>,
+        relocatable with the <Text as="span" variant="code-default-xs">AETHER_HOME</Text>{" "}
+        environment variable. The uninstaller asks before touching that folder
+        — it never deletes your data silently.
+      </>
+    ),
+  },
+];
 
 function FeatureCard({ icon, title, body }: { icon: string; title: string; body: string }) {
   return (
@@ -439,6 +480,24 @@ export default async function AetherDownload() {
             </Card>
           ))}
         </Column>
+      </Column>
+
+      <Column fillWidth gap="16">
+        <Heading as="h2" variant="heading-strong-l">
+          Frequently asked questions
+        </Heading>
+        <AccordionGroup items={faqs.map(({ question, answer }) => ({
+          title: question,
+          content: (
+            <Text variant="body-default-s" onBackground="neutral-weak">
+              {answer}
+            </Text>
+          ),
+        }))}
+          fillWidth
+          size="m"
+          autoCollapse
+        />
       </Column>
 
       <Column fillWidth gap="40" horizontal="center" marginTop="24">
