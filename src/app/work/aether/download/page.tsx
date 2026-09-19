@@ -21,10 +21,20 @@ import { CopyButton } from "@/components/CopyButton";
 import {
   formatBytes,
   getLatestRelease,
-  RELEASES_URL,
+  FALLBACK_RELEASE,
+  LATEST_INSTALLER_NAME,
   RELEASES_LIST_URL,
   type ReleaseInfo,
 } from "@/utils/githubRelease";
+
+/**
+ * Page data source: live GitHub release when reachable, hardcoded baseline
+ * otherwise. Never null — the page always renders real version, changelog,
+ * and checksum text instead of blank fields or a stuck loading state.
+ */
+async function loadRelease(): Promise<ReleaseInfo> {
+  return (await getLatestRelease()) ?? FALLBACK_RELEASE;
+}
 
 const REPO = "https://github.com/kamyCodes/Aether";
 
@@ -64,7 +74,7 @@ const features = [
 const steps = [
   {
     title: "Download the installer",
-    body: "Grab the latest Aether-Setup-<version>.exe from GitHub Releases.",
+    body: "Grab Aether-Setup-latest.exe — the download button always points at the newest release.",
   },
   {
     title: "Run it",
@@ -149,9 +159,9 @@ function FeatureCard({ icon, title, body }: { icon: string; title: string; body:
   );
 }
 
-function DownloadButton({ release }: { release: ReleaseInfo | null }) {
-  const href = release?.latestDownloadUrl ?? RELEASES_URL;
-  const size = release?.installer ? formatBytes(release.installer.size) : "";
+function DownloadButton({ release }: { release: ReleaseInfo }) {
+  const href = release.latestDownloadUrl;
+  const size = release.installer?.size ? formatBytes(release.installer.size) : "";
 
   return (
     <Button
@@ -171,7 +181,7 @@ function DownloadButton({ release }: { release: ReleaseInfo | null }) {
 function VerifyDownload({ release }: { release: ReleaseInfo }) {
   if (!release.sha256Digest) return null;
 
-  const certutilCommand = `certutil -hashfile ${release.installer?.name ?? "Aether-Setup.exe"} SHA256`;
+  const certutilCommand = `certutil -hashfile ${release.installer?.name ?? LATEST_INSTALLER_NAME} SHA256`;
 
   return (
     <Card
@@ -289,7 +299,7 @@ function ReleaseNotes({ release }: { release: ReleaseInfo }) {
 }
 
 export async function generateMetadata() {
-  const release = await getLatestRelease();
+  const release = await loadRelease();
 
   return Meta.generate({
     title: "Download Aether – local-first AI development environment",
@@ -303,7 +313,7 @@ export async function generateMetadata() {
 }
 
 export default async function AetherDownload() {
-  const release = await getLatestRelease();
+  const release = await loadRelease();
 
   return (
     <Column as="section" maxWidth="m" horizontal="center" gap="l" paddingTop="24">
@@ -347,16 +357,10 @@ export default async function AetherDownload() {
           leave your machine.
         </Text>
         <Row gap="8" wrap horizontal="center">
-          {release ? (
-            <Tag variant="brand" prefixIcon="download">
-              {release.tagName} latest
-            </Tag>
-          ) : (
-            <Tag variant="neutral" prefixIcon="download">
-              Free installer
-            </Tag>
-          )}
-          {release != null && release.totalDownloads > 0 && (
+          <Tag variant="brand" prefixIcon="download">
+            {release.tagName} latest
+          </Tag>
+          {release.totalDownloads > 0 && (
             <Tag variant="neutral" prefixIcon="download">
               {formatCount(release.totalDownloads)} downloads
             </Tag>
@@ -386,15 +390,13 @@ export default async function AetherDownload() {
             View on GitHub
           </Button>
         </Row>
-        {release?.installer && (
-          <Text variant="body-default-xs" onBackground="neutral-weak">
-            {release.installer.name}
-          </Text>
-        )}
-        {release && <VerifyDownload release={release} />}
+        <Text variant="body-default-xs" onBackground="neutral-weak">
+          {release.installer?.name ?? LATEST_INSTALLER_NAME}
+        </Text>
+        <VerifyDownload release={release} />
       </Column>
 
-      {release && <ReleaseNotes release={release} />}
+      <ReleaseNotes release={release} />
 
       <Column fillWidth gap="16">
         <Heading as="h2" variant="heading-strong-l">

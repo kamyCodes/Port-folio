@@ -14,7 +14,7 @@ import {
   SpacingToken,
 } from "@once-ui-system/core";
 import { Footer, Header, Loader, RouteGuard, Providers } from "@/components";
-import { baseURL, effects, fonts, style, dataStyle, home, person } from "@/resources";
+import { baseURL, effects, fonts, style, dataStyle, home, person, social } from "@/resources";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -31,6 +31,31 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLdPerson = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": person.name,
+    "givenName": person.firstName,
+    "familyName": person.lastName,
+    "jobTitle": person.role,
+    "email": person.email,
+    "url": baseURL,
+    "image": `${baseURL}${person.avatar}`,
+    "sameAs": social.map((s) => s.link),
+    "description": home.description,
+    "knowsAbout": [
+      "Software Engineering",
+      "Artificial Intelligence",
+      "Full-Stack Development",
+      "React",
+      "Next.js",
+      "Python",
+      "Flask",
+      "Node.js",
+      "Cyber Threat Intelligence"
+    ]
+  };
+
   return (
     <Flex
       suppressHydrationWarning
@@ -46,6 +71,13 @@ export default async function RootLayout({
       )}
     >
       <head>
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="AI Agent Readable Context (llms.txt)" />
+        <link rel="alternate" type="text/plain" href="/llms-full.txt" title="Full AI Agent Readable Content (llms-full.txt)" />
+        <meta name="ai-agent" content="enabled" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPerson) }}
+        />
         <script
           id="theme-init"
           dangerouslySetInnerHTML={{
