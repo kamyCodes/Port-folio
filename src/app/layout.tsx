@@ -15,6 +15,7 @@ import {
 } from "@once-ui-system/core";
 import { Footer, Header, Loader, RouteGuard, Providers } from "@/components";
 import { baseURL, effects, fonts, style, dataStyle, home, person, social } from "@/resources";
+import { Analytics } from "@vercel/analytics/next";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -199,6 +200,7 @@ export default async function RootLayout({
           <Loader />
         </Column>
       </Providers>
+      <Analytics />
     </Flex>
   );
 }
