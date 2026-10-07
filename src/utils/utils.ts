@@ -16,6 +16,9 @@ type Metadata = {
   summary: string;
   image?: string;
   images: string[];
+  preview?: string;
+  /** "app" projects only exist as a case study; anything else is a live site. */
+  kind?: string;
   tag?: string;
   team: Team[];
   link?: string;
@@ -47,6 +50,8 @@ function readMDXFile(filePath: string) {
     summary: data.summary || "",
     image: data.image || "",
     images: data.images || [],
+    preview: data.preview || "",
+    kind: data.kind || "website",
     tag: data.tag || [],
     team: data.team || [],
     link: data.link || "",

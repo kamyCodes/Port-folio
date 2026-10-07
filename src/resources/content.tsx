@@ -54,7 +54,7 @@ const home: Home = {
   description: `Kamy Ewang is a Software Engineer based in Uyo, Nigeria, specialising in AI-powered full-stack applications, real-time platforms, and modern web development with React, Next.js, Python, and Flask.`,
   headline: <>Building intelligent products that solve real-world problems</>,
   featured: {
-    display: true,
+    display: false,
     title: (
       <Row gap="12" vertical="center">
         <strong className="ml-4">Local Job Connect</strong>{" "}
@@ -104,6 +104,20 @@ const about: About = {
     title: "Work Experience",
     experiences: [
       {
+        company: "People Growth Africa",
+        timeframe: "2026",
+        role: "Frontend Developer",
+        achievements: [
+          <>
+            Designed and built the HR & organisational consulting platform: 15 specialised service areas, an events and webinar showcase with pause and play controls, a blog, and member account flows.
+          </>,
+          <>
+            Shipped a motion-rich React SPA behind a code-split, hashed production bundle for a fast first paint.
+          </>,
+        ],
+        images: [],
+      },
+      {
         company: "Freelance",
         timeframe: "2024 - Present",
         role: "Full-Stack Developer",
@@ -140,6 +154,10 @@ const about: About = {
       {
         name: "University",
         description: <>Bachelor of Science in Software Engineering.</>,
+      },
+      {
+        name: "UI/UX Designer Certificate",
+        description: <>Product Design University.</>,
       },
     ],
   },
@@ -221,7 +239,7 @@ const work: Work = {
   path: "/work",
   label: "Work",
   title: `Projects by Kamy Ewang – AI & Full-Stack Development`,
-  description: `Explore full-stack and AI-powered projects built by Kamy Ewang, including Aether, Candid, Local Job Connect, Sentinel NLP, Energy2Green, and more.`,
+  description: `Explore full-stack and AI-powered projects built by Kamy Ewang, including Aether, Candid, Local Job Connect, Sentinel NLP, Energy2Green, People Growth Africa, and more.`,
 };
 
 const gallery: Gallery = {

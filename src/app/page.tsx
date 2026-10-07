@@ -12,6 +12,8 @@ import {
   Line,
 } from "@once-ui-system/core";
 import { home, about, person, baseURL, routes } from "@/resources";
+import { WorkShowcase } from "@/components/work/WorkShowcase";
+import styles from "./page.module.scss";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -25,7 +27,7 @@ export async function generateMetadata() {
 
 export default function Home() {
   return (
-    <Column maxWidth="m" gap="l" paddingY="8" horizontal="center">
+    <Column className={styles.page} maxWidth="m" gap="16" paddingY="4" horizontal="center">
       <Schema
         as="webPage"
         baseURL={baseURL}
@@ -39,14 +41,13 @@ export default function Home() {
           image: `${baseURL}${person.avatar}`,
         }}
       />
-      <Column fillWidth horizontal="center" gap="m">
+      <Column fillWidth horizontal="center" gap="8">
         <Column maxWidth="s" horizontal="center" align="center">
           {home.featured.display && (
             <RevealFx
               fillWidth
               horizontal="center"
-              paddingTop="4"
-              paddingBottom="8"
+              paddingBottom="4"
               paddingLeft="12"
             >
               <Badge
@@ -63,16 +64,16 @@ export default function Home() {
             </RevealFx>
           )}
           <RevealFx translateY="4" fillWidth horizontal="center" paddingBottom="4">
-            <Heading wrap="balance" variant="display-strong-l">
+            <Heading wrap="balance" variant="display-strong-m">
               {home.headline}
             </Heading>
           </RevealFx>
-          <RevealFx translateY="8" delay={0.2} fillWidth horizontal="center" paddingBottom="8">
-            <Text wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
+          <RevealFx translateY="8" delay={0.2} fillWidth horizontal="center" paddingBottom="4">
+            <Text wrap="balance" onBackground="neutral-weak" variant="body-default-l">
               {home.subline}
             </Text>
           </RevealFx>
-          <RevealFx paddingTop="8" delay={0.4} horizontal="center" paddingLeft="12">
+          <RevealFx delay={0.4} horizontal="center" paddingLeft="12">
             <Button
               id="about"
               data-border="rounded"
@@ -102,7 +103,11 @@ export default function Home() {
           </RevealFx>
         </Column>
       </Column>
-      
+
+      <RevealFx translateY="4" delay={0.6} fillWidth>
+        <WorkShowcase />
+      </RevealFx>
+
     </Column>
   );
 }

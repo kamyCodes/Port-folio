@@ -1,0 +1,19 @@
+@use "../breakpoints.scss" as breakpoints;
+
+.head {
+  position: relative;
+}
+
+/* Keeps the title optically centred while the link rides on the same line */
+.allProjects {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@include breakpoints.s {
+  .allProjects {
+    display: none;
+  }
+}

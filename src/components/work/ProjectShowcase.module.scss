@@ -1,0 +1,289 @@
+@use "../breakpoints.scss" as breakpoints;
+
+.showcase {
+  /* The page hands the carousel a stage height through --stage-height so it can
+     budget the viewport; standalone, it falls back to a sane share of the
+     screen. Both the stage and the cards are sized from it, so the whole thing
+     scales as one piece. */
+  --stage-fallback-height: clamp(176px, calc(100svh - 578px), 336px);
+  position: relative;
+}
+
+.showcase:focus-visible {
+  outline: 2px solid var(--brand-solid-strong);
+  outline-offset: 12px;
+  border-radius: var(--radius-l);
+}
+
+/* ---- 3D stage ---- */
+
+.stage {
+  position: relative;
+  height: var(--stage-height, var(--stage-fallback-height));
+  perspective: 1600px;
+  perspective-origin: 50% 50%;
+  overflow: hidden;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 7%,
+    #000 93%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+}
+
+.stageDragging {
+  cursor: grabbing;
+}
+
+.track {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(54%, calc(var(--stage-height, var(--stage-fallback-height)) * 16 / 9));
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  background: var(--neutral-alpha-weak);
+  box-shadow: 0 20px 48px -22px rgb(0 0 0 / 0.7);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+  transition:
+    transform 640ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    opacity 640ms ease,
+    box-shadow 640ms ease;
+}
+
+/* While swiping, cards follow the pointer with no catch-up delay */
+.stageDragging .card {
+  transition: none;
+}
+
+.cardActive {
+  box-shadow: 0 32px 70px -26px rgb(0 0 0 / 0.85);
+}
+
+.cardLink {
+  display: block;
+  text-decoration: none;
+}
+
+.card:hover .media {
+  transform: scale(1.04);
+}
+
+.media {
+  transition: transform 600ms ease;
+}
+
+/* Keeps the screenshots from competing with the copy on top of them: flanking
+   cards recede, and the centred one is dimmed just enough for the text. */
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: rgb(8 10 14 / 0.55);
+  transition: background var(--transition-micro-long);
+  pointer-events: none;
+}
+
+.cardActive .scrim {
+  background: rgb(8 10 14 / 0.22);
+}
+
+/* Under the pointer the shot gets out of the way of the screenshot */
+.cardHover .scrim {
+  background: rgb(8 10 14 / 0.06);
+}
+
+.cardActive .overlay {
+  opacity: 1;
+  transform: none;
+}
+
+/* The pointer decides which card owns the copy: hovering a neighbour hands it
+   the title and description instead of the centred card. */
+.hovering .card:not(.cardHover) .overlay {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.cardHover .overlay {
+  opacity: 1;
+  transform: none;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px;
+  background: linear-gradient(
+    180deg,
+    rgb(8 10 14 / 0) 34%,
+    rgb(8 10 14 / 0.72) 66%,
+    rgb(8 10 14 / 0.96) 100%
+  );
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 480ms ease,
+    transform 480ms ease;
+  /* Clicks fall through to the card itself, except on the links below */
+  pointer-events: none;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 62%;
+}
+
+.title {
+  color: #fff;
+}
+
+/* Held back until the card grows, so it arrives with the enlargement */
+.summary {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: rgb(255 255 255 / 0.82);
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 420ms ease 60ms,
+    transform 480ms cubic-bezier(0.22, 0.61, 0.36, 1) 60ms;
+}
+
+.cardHover .summary {
+  opacity: 1;
+  transform: none;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex: none;
+  /* Links opt back in below; the hint stays transparent to clicks so the card
+     underneath keeps its full hit area. */
+  pointer-events: none;
+}
+
+/* Apps have no second destination, so this only names what the card does */
+.hint {
+  color: rgb(255 255 255 / 0.6);
+  font-size: var(--font-size-label-s);
+  line-height: var(--line-height-label-s);
+}
+
+.action {
+  pointer-events: auto;
+  color: rgb(255 255 255 / 0.9);
+  font-size: var(--font-size-label-s);
+  line-height: var(--line-height-label-s);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgb(255 255 255 / 0.4);
+  transition: text-decoration-color var(--transition-micro-short), color var(--transition-micro-short);
+}
+
+.action:hover {
+  color: #fff;
+  text-decoration-color: currentColor;
+}
+
+.action:focus-visible {
+  outline: 2px solid var(--brand-solid-strong);
+  outline-offset: 2px;
+  border-radius: var(--radius-xs);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@include breakpoints.m {
+  .showcase {
+    --stage-fallback-height: clamp(160px, calc(100svh - 560px), 300px);
+  }
+
+  .card {
+    width: min(62%, calc(var(--stage-height, var(--stage-fallback-height)) * 16 / 9));
+  }
+}
+
+@include breakpoints.s {
+  .showcase {
+    --stage-fallback-height: clamp(148px, 24vh, 240px);
+  }
+
+  .card {
+    width: min(86%, calc(var(--stage-height, var(--stage-fallback-height)) * 16 / 9));
+  }
+
+  .overlay {
+    padding: 12px 14px;
+  }
+
+  .copy {
+    max-width: 70%;
+  }
+
+  .summary {
+    -webkit-line-clamp: 1;
+  }
+}
+
+/* No pointer means no hover: the centred card shows its description up front */
+@media (hover: none) {
+  .cardActive .summary {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .cardActive,
+  .stageDragging .card {
+    transition: none;
+  }
+
+  .media,
+  .card:hover .media {
+    transition: none;
+    transform: none;
+  }
+
+  .overlay,
+  .scrim,
+  .action,
+  .summary {
+    transition: none;
+  }
+}

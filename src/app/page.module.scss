@@ -1,0 +1,25 @@
+@use "../components/breakpoints.scss" as breakpoints;
+
+.page {
+  /* One screen, no scroll: the carousel takes whatever is left once the hero,
+     the section header, the controls and the footer are paid for. */
+  --stage-height: clamp(190px, calc(100svh - 624px), 336px);
+}
+
+/* Short laptops give the hero less room so the carousel keeps its own. The
+   multipliers are the design system's own type hooks, so no component styles
+   have to be overridden. */
+@media (max-height: 820px) {
+  .page {
+    --font-size-display-multiplier: 0.85;
+    --line-height-display-multiplier: 0.85;
+    --font-size-body-multiplier: 0.94;
+    --stage-height: clamp(170px, calc(100svh - 596px), 300px);
+  }
+}
+
+@include breakpoints.s {
+  .page {
+    --stage-height: clamp(160px, 26vh, 260px);
+  }
+}
